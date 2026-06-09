@@ -1,0 +1,11 @@
+<h2>Tickets</h2>
+<a routerLink="/create">Create Ticket</a>
+<ul>
+  @for (ticket of tickets; track ticket.id) {
+    <li>
+      <strong>{{ ticket.subject }}</strong>
+      - {{ ticket.status }}
+      - {{ ticket.priority }}
+    </li>
+  }
+</ul>
