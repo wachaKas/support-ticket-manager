@@ -76,10 +76,12 @@ public class AuthService : IAuthService
     
     private string GenerateJwtToken(User user)
     {
-        var key = _configuration["Jwt:Key"];
+        var key = _configuration["Jwt:Key"]
+            ?? throw new InvalidOperationException(
+                "Jwt:Key is not configured. Set it via user-secrets (dotnet user-secrets set \"Jwt:Key\" \"...\") or the Jwt__Key environment variable.");
 
         var securityKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(key!));
+            Encoding.UTF8.GetBytes(key));
 
         var credentials = new SigningCredentials(
             securityKey,
