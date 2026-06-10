@@ -4,6 +4,14 @@ import { Observable } from 'rxjs';
 
 import { Ticket } from '../models/ticket';
 
+export interface PagedResult<T> {
+  items: T[];
+  totalCount: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,11 +21,11 @@ export class TicketService {
 
   constructor(private http: HttpClient) {}
 
-  getTickets(): Observable<Ticket[]> {
-    return this.http.get<Ticket[]>(this.apiUrl);
+  getTickets(): Observable<PagedResult<Ticket>> {
+    return this.http.get<PagedResult<Ticket>>(this.apiUrl);
   }
 
   createTicket(ticket: Ticket): Observable<Ticket> {
-  return this.http.post<Ticket>(this.apiUrl, ticket);
-}
+    return this.http.post<Ticket>(this.apiUrl, ticket);
+  }
 }
