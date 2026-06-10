@@ -5,10 +5,13 @@ using SupportTicket.Api.Models;
 using SupportTicket.Api.DTOs;
 using SupportTicket.Api.Services;
 using SupportTicket.Api.Enums;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SupportTicket.Api.Controllers;
 
+[Authorize]
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 public class TicketsController : ControllerBase
 {
@@ -84,6 +87,7 @@ public class TicketsController : ControllerBase
         return NoContent();
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteTicket(int id)
     {
