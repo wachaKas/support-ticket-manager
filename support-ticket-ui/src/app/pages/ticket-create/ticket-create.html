@@ -19,12 +19,12 @@
 
   <div>
     <label>Priority:</label>
-    <select [(ngModel)]="ticket.priority" name="priority">
-      <option>Low</option>
-      <option>Medium</option>
-      <option>High</option>
-      <option>Critical</option>
-    </select>
+<select [(ngModel)]="ticket.priority" name="priority">
+  <option [ngValue]="0">Low</option>
+  <option [ngValue]="1">Medium</option>
+  <option [ngValue]="2">High</option>
+  <option [ngValue]="3">Critical</option>
+</select>
   </div>
 
   <button type="submit">Create</button>

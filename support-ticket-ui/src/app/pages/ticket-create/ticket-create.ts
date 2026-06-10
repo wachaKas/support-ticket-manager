@@ -19,7 +19,7 @@ export class TicketCreate {
     subject: '',
     message: '',
     status: 'New',
-    priority: 'Medium',
+    priority: 1,
     createdAt: new Date().toISOString()
   };
 
