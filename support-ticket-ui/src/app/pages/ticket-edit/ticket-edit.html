@@ -1,0 +1,72 @@
+<div class="edit-page">
+  <div class="edit-card">
+    <h2>Edit Ticket</h2>
+    <p class="subtitle">Update ticket details and save your changes.</p>
+
+    <form (ngSubmit)="updateTicket()" class="edit-form">
+
+      <div class="form-group">
+        <label>Email</label>
+        <input
+          type="email"
+          name="customerEmail"
+          [(ngModel)]="ticket.customerEmail"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Subject</label>
+        <input
+          type="text"
+          name="subject"
+          [(ngModel)]="ticket.subject"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Message</label>
+        <textarea
+          name="message"
+          rows="5"
+          [(ngModel)]="ticket.message">
+        </textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Status</label>
+          <select [(ngModel)]="ticket.status" name="status">
+            <option [ngValue]="'New'">New</option>
+            <option [ngValue]="'InProgress'">In Progress</option>
+            <option [ngValue]="'Resolved'">Resolved</option>
+            <option [ngValue]="'Closed'">Closed</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Priority</label>
+          <select [(ngModel)]="ticket.priority" name="priority">
+            <option [ngValue]="'Low'">Low</option>
+            <option [ngValue]="'Medium'">Medium</option>
+            <option [ngValue]="'High'">High</option>
+            <option [ngValue]="'Critical'">Critical</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button
+        type="button"
+        class="btn-secondary"
+        (click)="cancel()">
+        Cancel
+        </button>
+
+        <button type="submit" class="btn-primary">
+          Save changes
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -28,4 +28,12 @@ export class TicketService {
   createTicket(ticket: Ticket): Observable<Ticket> {
     return this.http.post<Ticket>(this.apiUrl, ticket);
   }
+
+  getTicketById(id: number): Observable<Ticket> {
+  return this.http.get<Ticket>(`${this.apiUrl}/${id}`);
+  }
+
+  updateTicket(id: number, ticket: any): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/${id}`, ticket);
+  }
 }

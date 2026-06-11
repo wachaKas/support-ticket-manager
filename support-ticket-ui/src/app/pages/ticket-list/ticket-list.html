@@ -1,14 +1,75 @@
-<h2>Tickets</h2>
+<h2>Support Tickets</h2>
 
-<a routerLink="/create">Create Ticket</a>
-<button (click)="logout()">Logout</button>
+<div class="actions">
+  <a routerLink="/create" class="btn-create">
+    + Create Ticket
+  </a>
 
-<ul>
-  <li *ngFor="let ticket of tickets">
-    <strong>{{ ticket.subject }}</strong>
-    - {{ ticket.customerEmail }}
-    - {{ ticket.status }}
-    - {{ ticket.priority }}
-  </li>
-</ul>
+  <button (click)="logout()" class="btn-logout">
+    Logout
+  </button>
+</div>
 
+<div *ngIf="ticketsResponse$ | async as response">
+
+  <p class="ticket-count">
+    Total tickets: {{ response.totalCount }}
+  </p>
+
+  <div class="ticket-container">
+
+    <div
+      class="ticket-card"
+      *ngFor="let ticket of response.items">
+
+      <div class="ticket-header">
+        <h3>{{ ticket.subject }}</h3>
+
+        <span
+          class="status"
+          [ngClass]="{
+            'status-new': ticket.status === 'New',
+            'status-progress': ticket.status === 'InProgress',
+            'status-resolved': ticket.status === 'Resolved',
+            'status-closed': ticket.status === 'Closed'
+          }"
+        >
+          {{ ticket.status }}
+        </span>
+      </div>
+
+      <div class="ticket-body">
+
+        <p class="email">
+          {{ ticket.customerEmail }}
+        </p>
+
+        <p class="message">
+          {{ ticket.message }}
+        </p>
+
+      </div>
+
+      <div class="ticket-footer">
+
+        <span class="priority">
+          {{ ticket.priority }}
+        </span>
+
+        <span>
+          {{ ticket.createdAt | date:'dd.MM.yyyy HH:mm' }}
+        </span>
+
+        <a
+          [routerLink]="['/edit', ticket.id]"
+          class="edit-link">
+          Edit
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
